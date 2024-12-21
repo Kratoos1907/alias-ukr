@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+apphosting.local.yaml
+firebase.env.json
+alias-ukr-d86359af6d53.json

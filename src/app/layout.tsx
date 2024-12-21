@@ -1,5 +1,8 @@
+import '@/lib/firebase-admin';
 import type { Metadata } from 'next';
 import './globals.css';
+import Wrapper from '@/components/global/Wrapper';
+import AuthButton from '@/components/global/LoginButton';
 
 export const metadata: Metadata = {
   title: 'Alias',
@@ -13,7 +16,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={`antialiased`}>{children}</body>
+      <body className={`antialiased`}>
+        <Wrapper>
+          <AuthButton />
+          {children}
+        </Wrapper>
+      </body>
     </html>
   );
 }

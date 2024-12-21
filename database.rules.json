@@ -1,0 +1,10 @@
+{
+  "rules": {
+    "lobbies": {
+      "$lobbyId": {
+        ".read": "data.child('players').hasChild(auth.uid)",
+        ".write": "data.child('host').val() === auth.uid"
+      }
+    }
+  }
+}

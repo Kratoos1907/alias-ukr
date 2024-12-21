@@ -1,0 +1,11 @@
+{
+  "projects": {
+    "default": "alias-ukr"
+  },
+  "targets": {},
+  "etags": {
+    "alias-ukr": {
+      "extensionInstances": {}
+    }
+  }
+}
