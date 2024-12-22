@@ -8,25 +8,20 @@ const firestore = admin.firestore();
 
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params: { id: userId } }: { params: { id: string } }
 ) {
   try {
     const session = await getServerSession(authOptions);
-    console.log(session);
-
     if (!session) {
       console.log('No session found');
       return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
     }
-
-    console.log('Session data:', session);
 
     if (!session.user?.id) {
       console.log('User ID is missing in session');
       return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
     }
 
-    const userId = params.id;
     const userDocRef = firestore.collection('userProfiles').doc(userId);
     const userDoc = await userDocRef.get();
 

@@ -2,7 +2,7 @@
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import Button from './Button';
+import { Button } from '../ui/button';
 
 interface JoinLobbyButtonProps {
   lobbyId: string;
@@ -42,7 +42,7 @@ export default function JoinLobbyButton({
 
       const data = await res.json();
 
-      if (onJoined) onJoined();
+      onJoined?.();
       console.log('Joined lobby successfully:', data);
     } catch (error) {
       setError(`Error joining lobby: ${error}`);

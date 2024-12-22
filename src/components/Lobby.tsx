@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import type { Lobby } from './Lobbies';
 import JoinLobbyButton from './global/JoinLobbyButton';
-import UserCard from './UserCard';
+import UserCard from './global/UserCard';
 
 export default function Lobby(lobby: Lobby) {
   return (

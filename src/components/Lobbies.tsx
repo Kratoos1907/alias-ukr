@@ -1,8 +1,11 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import AuthButton from './global/LoginButton';
-import CreateLobbyButton from './global/CreateLobbyButton';
+
+export interface Team {
+  name: string;
+  members?: { memberId: string }[];
+}
 
 export interface Lobby {
   id: string;
@@ -13,6 +16,7 @@ export interface Lobby {
   };
   members: string[];
   isOpen: boolean;
+  teams?: Team[];
 }
 
 export interface UserProfile {
@@ -25,7 +29,7 @@ export interface UserProfile {
     _nanoseconds: number;
   };
 }
-import UserCard from './UserCard';
+import UserCard from './global/UserCard';
 import Lobby from './Lobby';
 
 export default function Lobbies() {

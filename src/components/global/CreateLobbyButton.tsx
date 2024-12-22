@@ -1,6 +1,6 @@
 'use client';
 import { useSession } from 'next-auth/react';
-import Button from './Button';
+import { Button } from '../ui/button';
 
 export default function CreateLobbyButton() {
   const { data: session } = useSession();
@@ -15,6 +15,7 @@ export default function CreateLobbyButton() {
         headers: {
           'Content-Type': 'application/json',
         },
+        body: JSON.stringify({ name: session?.user?.id || '' }),
       });
 
       if (!res.ok) {

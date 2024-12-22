@@ -1,29 +1,18 @@
 import { NextResponse } from 'next/server';
 import { firestore } from '@/lib/firebase-admin';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 
 async function POST(req: Request) {
   try {
-    const session = await getServerSession(authOptions);
-
-    if (!session) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-    }
-
-    const userId = session.user.id;
-
-    if (!userId) {
-      return NextResponse.json({ error: 'Missing user ID' }, { status: 400 });
-    }
-
     const lobbyRef = firestore()?.collection('lobbies').doc();
+
+    const { name } = await req.json();
 
     try {
       await lobbyRef?.set({
-        owner: userId,
+        name,
+        owner: name,
         createdAt: new Date(),
-        members: [userId],
+        members: [name],
         isOpen: true,
       });
     } catch (firestoreError) {

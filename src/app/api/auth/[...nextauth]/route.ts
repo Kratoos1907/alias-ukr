@@ -1,10 +1,12 @@
+import { NextAuthOptions } from 'next-auth';
 import { admin } from '@/lib/firebase-admin';
 import NextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 
 const firestore = admin.firestore();
 
-export const authOptions = {
+// Declare the authOptions with explicit type
+export const authOptions: NextAuthOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID ?? '',
@@ -28,7 +30,8 @@ export const authOptions = {
       }
       return token;
     },
-    async signIn({ user, account, profile }: any) {
+
+    async signIn({ user }: { user: any; account: any; profile?: any }) {
       try {
         const userDocRef = firestore.collection('userProfiles').doc(user.id);
         const userDoc = await userDocRef.get();
@@ -57,4 +60,5 @@ export const authOptions = {
 
 const handler = NextAuth(authOptions);
 
+// Export both GET and POST methods to handle all requests
 export { handler as GET, handler as POST };
